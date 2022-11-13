@@ -11,28 +11,28 @@
 **Технологии использованные в проекте:**
 
 **Фронтенд:**
-1. HTML;
-2. CSS;
-3. Flex CSS;
-4. Grid CSS;
-6. Media queries;
-7. BEM;
-8. Nested file structure;
-9. Webpack;
-10. JS;
-11. REACT.js(functional components && hooks);
-12. REST API;
-13. Used localStorage;
+1. HTML.
+2. CSS.
+3. Flex CSS.
+4. Grid CSS.
+6. Media queries.
+7. BEM.
+8. Nested file structure.
+9. Webpack.
+10. JS.
+11. REACT.js(functional components && hooks).
+12. REST API.
+13. Used localStorage.
 
 **Бэкенд:**
-1. Node.js;
-2. Express;
-3. MongoDB;
-4. Mongoose;
-5. Celebrate & Joi;
-6. Express-rate-limit;
-7. Helmet;
-8. Winston + express-winston;
+1. Node.js.
+2. Express.
+3. MongoDB.
+4. Mongoose.
+5. Celebrate & Joi.
+6. Express-rate-limit.
+7. Helmet.
+8. Winston + express-winston.
 
 * [Ссылка на Проект](http://mestoproject.student.nomoredomains.icu)
 
