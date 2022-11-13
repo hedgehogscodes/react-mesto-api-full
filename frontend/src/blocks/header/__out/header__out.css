@@ -1,0 +1,14 @@
+.header__out {
+  margin: 0;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #a9a9a9;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.header__out:hover {
+  opacity: 0.6;
+}

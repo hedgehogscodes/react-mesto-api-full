@@ -1,0 +1,10 @@
+.photo-grid__image {
+  cursor: pointer;
+  width: 100%;
+  min-height: 282px;
+  max-height: 282px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  color: #000;
+}

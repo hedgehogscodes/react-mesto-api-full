@@ -1,0 +1,7 @@
+.photo-grid__info {
+  color: #000;
+  padding: 25px 15px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}

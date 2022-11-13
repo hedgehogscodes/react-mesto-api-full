@@ -1,0 +1,7 @@
+.photo-grid__btn_action_like {
+  min-width: 22px;
+  min-height: 19px;
+  background-image: url(../../../../images/Vector3.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

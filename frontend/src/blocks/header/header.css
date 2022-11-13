@@ -1,0 +1,27 @@
+@import url(./__mail/header__mail.css);
+@import url(./__info/header__info.css);
+@import url(./__sign/header__sign.css);
+@import url(./__out/header__out.css);
+
+.header {
+  padding: 45px 0 40px;
+  box-sizing: border-box;
+  margin: 0 auto 40px;
+  max-width: 882px;
+  border-bottom: 1px solid #545454b3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    padding-left: 27px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 28px calc(27 * 100% / 320) 31px;
+  }
+}

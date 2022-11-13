@@ -1,0 +1,24 @@
+.profile__info {
+  display: inline-grid;
+  grid-template-columns: minmax(200px, min-content) 60px;
+  grid-template-rows: auto;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  color: #FFF;
+}
+
+@media (max-width: 720px) {
+  .profile__info {
+    text-align: center;
+    margin-top: 26px;
+    justify-content: center;
+    grid-template-columns: minmax(200px, min-content) 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile__info {
+    grid-template-columns: minmax(200px, min-content) 28px;
+  }
+}

@@ -1,0 +1,14 @@
+.photo-grid__btn {
+  background: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+}
+
+.photo-grid__btn:hover {
+  opacity: .6;
+}

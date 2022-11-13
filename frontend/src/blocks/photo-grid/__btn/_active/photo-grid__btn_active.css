@@ -1,0 +1,8 @@
+.photo-grid__btn_active {
+  background-image: url(../../../../images/Union.svg);
+
+}
+
+.photo-grid__btn_active:hover {
+  opacity: 1;
+}

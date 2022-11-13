@@ -1,0 +1,10 @@
+.photo-grid {
+  display: block;
+  margin-top: 50px;
+}
+
+@media (max-width: 720px) {
+  .photo-grid {
+    margin-top: 36px;
+  }
+}

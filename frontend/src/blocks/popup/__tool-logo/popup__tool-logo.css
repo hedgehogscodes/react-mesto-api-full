@@ -1,0 +1,5 @@
+.popup__tool-logo{
+  display: block;
+  object-fit: contain;
+  margin: 26px auto 0;
+}
