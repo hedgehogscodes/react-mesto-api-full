@@ -1,6 +1,6 @@
-const usersRouter = require("express").Router();
-const { celebrate, CelebrateError, Joi } = require("celebrate");
-const validator = require("validator");
+const usersRouter = require('express').Router();
+const { celebrate, CelebrateError, Joi } = require('celebrate');
+const validator = require('validator');
 
 const {
   getUsers,
@@ -8,11 +8,11 @@ const {
   getUserById,
   updateUser,
   updateAvatar,
-} = require("../controllers/users");
+} = require('../controllers/users');
 
 const validateUserId = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().alphanum().length(24).hex(),
+    _id: Joi.string().length(24).hex(),
   }),
 });
 const validateUserUpdate = celebrate({
@@ -27,17 +27,17 @@ const validateUserAvatar = celebrate({
       .required()
       .custom((url) => {
         if (!validator.isURL(url)) {
-          throw new CelebrateError("Неверный URL");
+          throw new CelebrateError('Неверный URL');
         }
         return url;
       }),
   }),
 });
 
-usersRouter.get("/", getUsers);
-usersRouter.get("/me", getUser);
-usersRouter.get("/:_id", validateUserId, getUserById);
-usersRouter.patch("/me", validateUserUpdate, updateUser);
-usersRouter.patch("/me/avatar", validateUserAvatar, updateAvatar);
+usersRouter.get('/', getUsers);
+usersRouter.get('/me', getUser);
+usersRouter.get('/:_id', validateUserId, getUserById);
+usersRouter.patch('/me', validateUserUpdate, updateUser);
+usersRouter.patch('/me/avatar', validateUserAvatar, updateAvatar);
 
 module.exports = usersRouter;

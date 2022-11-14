@@ -1,11 +1,11 @@
-const Card = require("../models/cards");
+const Card = require('../models/cards');
 
-const NotFoundError = require("../utils/NotFoundError");
-const BadRequestError = require("../utils/BadRequestError");
-const ForbiddenError = require("../utils/ForbiddenError");
+const NotFoundError = require('../utils/NotFoundError');
+const BadRequestError = require('../utils/BadRequestError');
+const ForbiddenError = require('../utils/ForbiddenError');
 
 module.exports.getCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .then((cards) => {
       res.send(cards);
     })
@@ -19,9 +19,9 @@ module.exports.createCard = (req, res, next) => {
       res.send(newCard);
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         next(
-          new BadRequestError("Ошибка валидации. Введены некорректные данные"),
+          new BadRequestError('Ошибка валидации. Введены некорректные данные'),
         );
       } else {
         next(err);
@@ -31,23 +31,20 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params._id)
-    .select("+owner")
+    .select('+owner')
     .orFail(() => {
       throw new NotFoundError(
-        "Карточки с таким id не существует, невозможно удалить!",
+        'Карточки с таким id не существует, невозможно удалить!',
       );
     })
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
-        throw new ForbiddenError("Нельзя удалить чужую карточку!");
+        throw new ForbiddenError('Нельзя удалить чужую карточку!');
       }
     })
     .then(() => {
       Card.findByIdAndRemove(req.params._id)
         .then((card) => {
-          if (!card) {
-            throw new NotFoundError("Запрашиваемый ресурс не найден");
-          }
           res.send(card);
         })
         .catch(next);
@@ -64,7 +61,7 @@ module.exports.likeCard = (req, res, next) => {
     .then((card) => {
       if (!card) {
         throw new NotFoundError(
-          "Карточки с таким id не существует, невозможно проставить лайк",
+          'Карточки с таким id не существует, невозможно проставить лайк',
         );
       }
       res.send(card);
@@ -81,7 +78,7 @@ module.exports.dislikeCard = (req, res, next) => {
     .then((card) => {
       if (!card) {
         throw new NotFoundError(
-          "Карточки с таким id не существует, невозможно забрать лайк",
+          'Карточки с таким id не существует, невозможно забрать лайк',
         );
       }
       res.send(card);

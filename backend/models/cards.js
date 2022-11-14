@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
+const mongoose = require('mongoose');
+const validator = require('validator');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -15,7 +15,7 @@ const cardSchema = new mongoose.Schema({
       validator(v) {
         return validator.isURL(v);
       },
-      message: "This link is not valid!",
+      message: 'This link is not valid!',
     },
   },
   owner: {
@@ -32,4 +32,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("card", cardSchema);
+module.exports = mongoose.model('card', cardSchema);

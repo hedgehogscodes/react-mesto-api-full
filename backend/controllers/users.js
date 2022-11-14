@@ -1,12 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const NotFoundError = require("../utils/NotFoundError");
-const BadRequestError = require("../utils/BadRequestError");
-const UnauthError = require("../utils/UnauthError");
-const UniqueError = require("../utils/UniqueError");
+const NotFoundError = require('../utils/NotFoundError');
+const BadRequestError = require('../utils/BadRequestError');
+const UnauthError = require('../utils/UnauthError');
+const UniqueError = require('../utils/UniqueError');
 
-const User = require("../models/users");
+const User = require('../models/users');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -20,38 +20,20 @@ module.exports.getUsers = (req, res, next) => {
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError("Нет пользователя с таким id");
-      } else {
-        res.send(user);
-      }
+      res.send(user);
     })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        next(new UnauthError("Неверно введен id"));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.params._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError("Нет пользователя с таким id");
-      } else {
-        res.send(user);
-      }
+      res.send(user);
     })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        next(new UnauthError("Неверно введен id"));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -78,10 +60,10 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       console.log(err);
       if (err.code === 11000) {
-        next(new UniqueError("Данный email уже зарегистрирован"));
-      } else if (err.name === "ValidationError") {
+        next(new UniqueError('Данный email уже зарегистрирован'));
+      } else if (err.name === 'ValidationError') {
         next(
-          new BadRequestError("Ошибка валидации. Введены некорректные данные"),
+          new BadRequestError('Ошибка валидации. Введены некорректные данные'),
         );
       } else {
         next(err);
@@ -92,14 +74,14 @@ module.exports.createUser = (req, res, next) => {
 module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .orFail(new NotFoundError("Нет пользователя с таким id"))
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         next(
-          new BadRequestError("Ошибка валидации. Введены некорректные данные"),
+          new BadRequestError('Ошибка валидации. Введены некорректные данные'),
         );
       } else {
         next(err);
@@ -110,14 +92,14 @@ module.exports.updateUser = (req, res, next) => {
 module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .orFail(new NotFoundError("Нет пользователя с таким id"))
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         next(
-          new BadRequestError("Ошибка валидации. Введены некорректные данные"),
+          new BadRequestError('Ошибка валидации. Введены некорректные данные'),
         );
       } else {
         next(err);
@@ -130,12 +112,12 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       if (!user) {
-        throw new UnauthError("Авторизация не пройдена!");
+        throw new UnauthError('Авторизация не пройдена!');
       }
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
-        { expiresIn: "7d" },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' },
       );
       res.send({ token });
     })
