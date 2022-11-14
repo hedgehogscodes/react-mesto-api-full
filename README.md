@@ -39,4 +39,4 @@
 * [Ссылка на API](http://api.mestoproject.student.nomoredomains.icu)
 
 **Публичный IPv4:**
-158.160.33.8
+51.250.82.147
